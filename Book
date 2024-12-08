@@ -1,0 +1,17 @@
+struct Book {
+    title: String,
+    author: String,
+}
+
+fn print_book(book: &Book) {
+    println!("Book: {} by {}", book.title, book.author);
+}
+
+fn main() {
+    let book = Book {
+        title: String::from("1984"),
+        author: String::from("George Orwell"),
+    };
+    
+    print_book(&book); // Borrowing the book to avoid ownership transfer
+}
