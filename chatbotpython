@@ -1,0 +1,23 @@
+import random
+
+def chatbot():
+    greetings = ["Hello!", "Hi there!", "Hey!", "Hi! How can I help you?"]
+    farewells = ["Goodbye!", "See you later!", "Take care!", "Bye!"]
+    responses = {
+        "name": "I'm ChatBot, your assistant.",
+        "weather": "It's sunny and bright!",
+        "help": "I'm here to help with whatever you need!"
+    }
+
+    print("ChatBot: Hello! Type 'exit' to end the chat.")
+    while True:
+        user_input = input("You: ").lower()
+        if user_input == "exit":
+            print(f"ChatBot: {random.choice(farewells)}")
+            break
+        elif user_input in responses:
+            print(f"ChatBot: {responses[user_input]}")
+        else:
+            print(f"ChatBot: {random.choice(greetings)}")
+
+chatbot()
