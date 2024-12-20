@@ -1,0 +1,23 @@
+import os
+
+def count_files_in_directory(directory):
+    file_count = 0
+    folder_count = 0
+
+    for root, dirs, files in os.walk(directory):
+        folder_count += len(dirs)
+        file_count += len(files)
+
+    print(f"Directory: {directory}")
+    print(f"Total folders: {folder_count}")
+    print(f"Total files: {file_count}")
+
+def main():
+    directory = input("Enter the path of the directory to scan: ")
+    if os.path.exists(directory) and os.path.isdir(directory):
+        count_files_in_directory(directory)
+    else:
+        print("Invalid directory. Please check the path and try again.")
+
+if __name__ == "__main__":
+    main()
