@@ -1,0 +1,34 @@
+class EventManager {
+    private val events = mutableListOf<String>()
+
+    fun addEvent(event: String) {
+        events.add(event)
+        println("Event added: $event")
+    }
+
+    fun removeEvent(event: String) {
+        if (events.remove(event)) {
+            println("Event removed: $event")
+        } else {
+            println("Event not found.")
+        }
+    }
+
+    fun listEvents() {
+        if (events.isEmpty()) {
+            println("No events.")
+        } else {
+            println("Events:")
+            events.forEach { println("- $it") }
+        }
+    }
+}
+
+fun main() {
+    val manager = EventManager()
+    manager.addEvent("Meeting")
+    manager.addEvent("Workout")
+    manager.listEvents()
+    manager.removeEvent("Meeting")
+    manager.listEvents()
+}
