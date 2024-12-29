@@ -1,0 +1,25 @@
+import threading
+import requests
+
+urls = [
+    "https://www.example.com/file1.jpg",
+    "https://www.example.com/file2.jpg"
+]
+
+def download_file(url):
+    filename = url.split("/")[-1]
+    response = requests.get(url)
+    with open(filename, "wb") as file:
+        file.write(response.content)
+    print(f"{filename} downloaded!")
+
+threads = []
+for url in urls:
+    thread = threading.Thread(target=download_file, args=(url,))
+    threads.append(thread)
+    thread.start()
+
+for thread in threads:
+    thread.join()
+
+print("All downloads completed!")
