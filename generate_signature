@@ -1,0 +1,9 @@
+### 1. **AI艺术签名生成器**
+import random
+
+def generate_signature(name):
+    styles = ['✨', '🌟', '🔥', '💧', '🌀']
+    signature = f"{random.choice(styles)} {name} {random.choice(styles)}"
+    return signature
+
+print(generate_signature("Bobu"))
