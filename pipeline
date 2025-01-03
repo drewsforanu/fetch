@@ -1,0 +1,8 @@
+from transformers import pipeline
+
+# 加载预训练的情感分析模型
+classifier = pipeline('sentiment-analysis')
+
+# 分析情感
+result = classifier("I love using AI to solve problems!")
+print(result)
