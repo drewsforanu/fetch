@@ -1,0 +1,4 @@
+def print_intro():
+    print("Welcome to the Adventure Game!")
+    print("You find yourself in a dark forest. There are two paths ahead.")
+    print("One leads to the mountains, and the other leads to a mysterious castle.")
