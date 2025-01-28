@@ -1,0 +1,10 @@
+import os
+
+def batch_rename(folder, prefix):
+    for count, filename in enumerate(os.listdir(folder), 1):
+        old_path = os.path.join(folder, filename)
+        new_path = os.path.join(folder, f"{prefix}_{count}{os.path.splitext(filename)[1]}")
+        os.rename(old_path, new_path)
+
+# 使用示例
+batch_rename("your_folder_path", "new_name")
