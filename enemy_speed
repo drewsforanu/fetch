@@ -1,0 +1,7 @@
+level = 1
+if score >= 10:
+    level = 2
+    enemy_speed = 10
+elif score >= 20:
+    level = 3
+    enemy_speed = 15
