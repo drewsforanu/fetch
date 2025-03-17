@@ -1,0 +1,49 @@
+#include <iostream>
+#include <thread>
+#include <queue>
+#include <mutex>
+#include <condition_variable>
+#include <chrono>
+
+std::queue<int> buffer;
+std::mutex mtx;
+std::condition_variable cv;
+bool finished = false;
+
+void producer(int count) {
+    for (int i = 0; i < count; ++i) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        {
+            std::lock_guard<std::mutex> lock(mtx);
+            buffer.push(i);
+            std::cout << "生产: " << i << std::endl;
+        }
+        cv.notify_one();
+    }
+    finished = true;
+    cv.notify_all();
+}
+
+void consumer() {
+    while (true) {
+        std::unique_lock<std::mutex> lock(mtx);
+        cv.wait(lock, []{ return !buffer.empty() || finished; });
+        if (!buffer.empty()) {
+            int item = buffer.front();
+            buffer.pop();
+            lock.unlock();
+            std::cout << "消费: " << item << std::endl;
+        } else if (finished) {
+            break;
+        }
+    }
+}
+
+int main() {
+    std::thread prod(producer, 10);
+    std::thread cons(consumer);
+
+    prod.join();
+    cons.join();
+    return 0;
+}
