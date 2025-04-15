@@ -1,0 +1,21 @@
+class Observable {
+    constructor() {
+        this.observers = [];
+    }
+
+    subscribe(fn) {
+        this.observers.push(fn);
+    }
+
+    unsubscribe(fn) {
+        this.observers = this.observers.filter(sub => sub !== fn);
+    }
+
+    notify(data) {
+        this.observers.forEach(observer => observer(data));
+    }
+}
+
+const obs = new Observable();
+obs.subscribe(data => console.log('Observer 1:', data));
+obs.notify('Hello');
