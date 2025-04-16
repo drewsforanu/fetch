@@ -1,0 +1,21 @@
+<svg id="svg" width="500" height="500"></svg>
+<script>
+function drawFractal(x, y, size, depth) {
+    if (depth === 0) return;
+    const svg = document.getElementById("svg");
+    let rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    rect.setAttribute("x", x);
+    rect.setAttribute("y", y);
+    rect.setAttribute("width", size);
+    rect.setAttribute("height", size);
+    rect.setAttribute("fill", `rgba(0,0,0,${depth / 6})`);
+    svg.appendChild(rect);
+
+    let newSize = size / 2;
+    drawFractal(x - newSize / 2, y - newSize / 2, newSize, depth - 1);
+    drawFractal(x + size - newSize / 2, y - newSize / 2, newSize, depth - 1);
+    drawFractal(x + size - newSize / 2, y + size - newSize / 2, newSize, depth - 1);
+    drawFractal(x - newSize / 2, y + size - newSize / 2, newSize, depth - 1);
+}
+drawFractal(200, 200, 100, 5);
+</script>
