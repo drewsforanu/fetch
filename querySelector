@@ -1,0 +1,17 @@
+const list = document.querySelector("#sortable");
+let dragging = null;
+
+list.addEventListener("dragstart", (e) => {
+  dragging = e.target;
+  e.dataTransfer.effectAllowed = "move";
+});
+
+list.addEventListener("dragover", (e) => {
+  e.preventDefault();
+  const target = e.target.closest("li");
+  if (target && target !== dragging) {
+    const rect = target.getBoundingClientRect();
+    const next = (e.clientY - rect.top) > rect.height / 2;
+    list.insertBefore(dragging, next ? target.nextSibling : target);
+  }
+});
